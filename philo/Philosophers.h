@@ -14,4 +14,5 @@ typedef struct s_data {
     int n_philo;
 } t_data;
 
-int init_struct(t_data *data, char **av);
+void init_struct(t_data *data, char **av);
+int	ft_atoi(char *str);

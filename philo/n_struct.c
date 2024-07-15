@@ -1,6 +1,6 @@
 #include "Philosophers.h"
 
-int init_struct(t_data *data, char **av)
+void init_struct(t_data *data, char **av)
 {
-    data->n_philo = av[1];
+    data->n_philo = ft_atoi(av[1]);
 }
