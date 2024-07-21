@@ -11,6 +11,8 @@ int	ft_atoi(char *str)
 	j = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
+	if (str[i] == '+')
+		i++;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
@@ -20,3 +22,9 @@ int	ft_atoi(char *str)
 	}
 	return (result);
 }
+
+// int main ()
+// {
+// 	int i = 11;
+// 	printf("%d\n", ft_atoi("-11"));
+// }
