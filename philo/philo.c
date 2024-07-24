@@ -10,13 +10,19 @@ void all()
 }
 int main(int ac, char **av)
 {
-    atexit(all);
+    // atexit(all);
     t_data data;
 
     if (ac != 5 && ac != 6) 
-        printf("Error: Invalid arguments\n");
+    {
+        printf("hahahahahah");
+        return (1);
+    }
     if (!check_args(av))
-        printf("is not a number");
-    init_struct(&data, av);
+        return 1;
+    if (!init_struct(&data, av))
+        return 1;
+    // for (int i = 0; i < data.n_philo; i++)
+    //     printf("philo[id : %d] ", data.philo[i].id);
     free_philo(&data);
 }

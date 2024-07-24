@@ -15,10 +15,11 @@ typedef struct s_philo {
 
 typedef struct s_data {
     int n_philo;
-    pthread_mutex_t forks;
+    pthread_t *threads;
+    pthread_mutex_t *forks;
     t_philo *philo;
 } t_data;
 
 int     ft_atoi(char *str);
 int     check_args(char **av);
-void    init_struct(t_data *data, char **av);
+int    init_struct(t_data *data, char **av);
