@@ -22,4 +22,5 @@ typedef struct s_data {
 
 int     ft_atoi(char *str);
 int     check_args(char **av);
-int    init_struct(t_data *data, char **av);
+int    init_data(t_data *data, char **av);
+int     creat_threads(t_data *data);

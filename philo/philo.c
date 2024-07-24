@@ -14,15 +14,12 @@ int main(int ac, char **av)
     t_data data;
 
     if (ac != 5 && ac != 6) 
-    {
-        printf("hahahahahah");
         return (1);
-    }
     if (!check_args(av))
         return 1;
-    if (!init_struct(&data, av))
+    if (!init_data(&data, av))
         return 1;
-    // for (int i = 0; i < data.n_philo; i++)
-    //     printf("philo[id : %d] ", data.philo[i].id);
+    if (!creat_threads(&data))
+        return 1;
     free_philo(&data);
 }
