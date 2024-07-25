@@ -3,14 +3,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <pthread.h>
+#include <sys/time.h>
+
+typedef struct s_data t_data;
 
 typedef struct s_philo {
     int id;
     int r_fork;
     int l_fork;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
+    t_data *data;
 } t_philo;
 
 typedef struct s_data {
@@ -18,9 +19,12 @@ typedef struct s_data {
     pthread_t *threads;
     pthread_mutex_t *forks;
     t_philo *philo;
+    int time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
 } t_data;
 
 int     ft_atoi(char *str);
 int     check_args(char **av);
 int    init_data(t_data *data, char **av);
-int     creat_threads(t_data *data);
+int     create_threads(t_data *data);

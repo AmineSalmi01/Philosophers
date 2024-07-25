@@ -19,7 +19,7 @@ int main(int ac, char **av)
         return 1;
     if (!init_data(&data, av))
         return 1;
-    if (!creat_threads(&data))
+    if (!create_threads(&data))
         return 1;
     free_philo(&data);
 }
