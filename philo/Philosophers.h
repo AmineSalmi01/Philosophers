@@ -11,6 +11,7 @@ typedef struct s_philo {
     int id;
     int left_fork;
     int right_fork;
+    long last_meal;
     t_data *data;
 } t_philo;
 
@@ -21,6 +22,7 @@ typedef struct s_data {
     int time_to_sleep;
     pthread_t *threads;
     pthread_mutex_t *forks;
+    pthread_mutex_t print;
     t_philo *philo;
 } t_data;
 
@@ -28,3 +30,4 @@ int     ft_atoi(char *str);
 int     check_args(char **av);
 int     init_data(t_data *data, char **av);
 int     create_threads(t_data *data);
+void    print_message(t_philo *philo, char *message);

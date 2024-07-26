@@ -12,7 +12,7 @@ void all()
 }
 int main(int ac, char **av)
 {
-    atexit(all);
+    // atexit(all);
     t_data data;
 
     if (ac != 5 && ac != 6) 
@@ -23,5 +23,7 @@ int main(int ac, char **av)
         return 1;
     if (!create_threads(&data))
         return 1;
+    for (int i = 0; i < data.n_philo; i++)
+        pthread_join(data.threads[i], NULL);
     free_philo(&data);
 }

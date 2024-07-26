@@ -29,6 +29,7 @@ int init_data(t_data *data, char **av)
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);
     data->time_to_sleep = ft_atoi(av[4]);
+    pthread_mutex_init(&data->print, NULL);
     init_philo(data);
     return 1;
 }

@@ -1,18 +1,26 @@
 #include "Philosophers.h"
 
+void ft_think(t_philo *philo)
+{
+    print_message(philo, "is thinking");
+}
+
+void ft_sleep(t_philo *philo)
+{
+    print_message(philo, "is_sleeping");
+    sleep(4);
+}
+
 void *routine(void *arg)
 {
-    t_philo *philo = (t_philo *)arg;
+    t_philo *philo;
 
+    philo = (t_philo *)arg;
+    ft_think(philo);
+    ft_sleep(philo);
     // while (1)
     // {
-    //     if (philo->id % 2 == 0)
-    //     {
-    //         printf("%d is sleeping\n", philo->id);
-    //         usleep(philo->data->time_to_sleep * 1000);
-    //     }
-    //     printf("%d is eating\n", philo->id);
-    //     usleep(philo->data->time_to_eat * 1000);
+    //     printf("Philosopher %d is thinking\n", philo->id);
     // }
     return NULL;
 }
