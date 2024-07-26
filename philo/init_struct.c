@@ -9,6 +9,9 @@ void init_philo(t_data *data)
     {
         data->philo[i].id = i + 1;
         data->philo[i].data = data;
+        pthread_mutex_init(&data->forks[i], NULL);
+        data->philo[i].left_fork = i;
+        data->philo[i].right_fork = (i + data->n_philo - 1) % data->n_philo;
         i++;
     }
 }
@@ -20,7 +23,8 @@ int init_data(t_data *data, char **av)
         return 0;
     data->philo = malloc(sizeof(t_philo) * (data->n_philo));
     data->threads = malloc(sizeof(pthread_t) * (data->n_philo));
-    if (!data->philo || !data->threads)
+    data->forks = malloc(sizeof(pthread_mutex_t) * (data->n_philo));
+    if (!data->philo || !data->threads || !data->forks)
         return 0;
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);

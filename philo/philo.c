@@ -3,6 +3,8 @@
 void free_philo(t_data *data)
 {
     free(data->philo);
+    free(data->threads);
+    free(data->forks);
 }
 void all()
 {
@@ -10,7 +12,7 @@ void all()
 }
 int main(int ac, char **av)
 {
-    // atexit(all);
+    atexit(all);
     t_data data;
 
     if (ac != 5 && ac != 6) 
