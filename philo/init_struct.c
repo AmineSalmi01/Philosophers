@@ -16,7 +16,7 @@ void init_philo(t_data *data)
     }
 }
 
-int init_data(t_data *data, char **av)
+int init_data(t_data *data, char **av, int ac)
 {
     data->n_philo = ft_atoi(av[1]);
     if (data->n_philo > 200 || data->n_philo <= 0)
@@ -29,19 +29,10 @@ int init_data(t_data *data, char **av)
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);
     data->time_to_sleep = ft_atoi(av[4]);
+    data->nb_meals = -1;
+    if (ac == 6)
+        data->nb_meals = ft_atoi(av[5]);
     pthread_mutex_init(&data->print, NULL);
     init_philo(data);
     return 1;
 }
-
-
-// {
-//     if (id % 2 == 0)
-//         // sleeping
-//     while (1)
-//     {
-//         // thinking
-//         // eating
-//         // sleeping
-//     }
-// }

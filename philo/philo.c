@@ -19,7 +19,7 @@ int main(int ac, char **av)
         return (1);
     if (!check_args(av))
         return 1;
-    if (!init_data(&data, av))
+    if (!init_data(&data, av, ac))
         return 1;
     if (!create_threads(&data))
         return 1;
