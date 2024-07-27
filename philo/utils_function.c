@@ -7,25 +7,20 @@ void    print_message(t_philo *philo, char *message)
     pthread_mutex_unlock(&philo->data->print);
 }
 
-size_t get_time(void)
+void ft_usleep(long sleep_duration)
 {
-    size_t time;
-
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-    return (time);
-}
-
-int ft_usleep(size_t sleep_duration)
-{
-    size_t start = get_time();
-    size_t end = start + sleep_duration;
+    long start = get_time();
+    long end = start + sleep_duration;
 
     while (get_time() < end)
     {
         usleep(200);
     }
-    return (1);
 }
 
+bool philo_died(t_philo *philo)
+{
+    if (get_time() - philo->last_eat_time > philo->data->time_to_die)
+        return (true);
+    return (false);
+}

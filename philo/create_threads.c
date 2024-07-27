@@ -8,6 +8,7 @@ void ft_think(t_philo *philo)
 void ft_sleep(t_philo *philo)
 {
     print_message(philo, "is_sleeping");
+    philo->last_eat_time = get_time();
     ft_usleep(philo->data->time_to_sleep);
 }
 
@@ -26,9 +27,12 @@ void *routine(void *arg)
     t_philo *philo;
 
     philo = (t_philo *)arg;
-    ft_think(philo);
-    ft_sleep(philo);
-    ft_eat(philo);
+    while (philo_died(philo) == true)
+    {
+        ft_think(philo);
+        ft_sleep(philo);
+        ft_eat(philo);
+    }
     return NULL;
 }
 
