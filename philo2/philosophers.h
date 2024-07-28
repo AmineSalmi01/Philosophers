@@ -38,20 +38,6 @@ typedef struct s_data {
     t_philo *philo;
 } t_data;
 
-int     ft_atoi(char *str);
-int     check_args(char **av);
-int     init_data(t_data *data, char **av, int ac);
-int     create_threads(t_data *data);
-void    print_message(t_philo *philo, char *message);
 
-void    ft_usleep(long sleep_duration);
-long    get_time(void);
-
-bool    philo_died(t_philo *philo);
-
-t_state get_philo_state(t_philo *philo);
-void    set_philo_state(t_philo *philo, t_state state);
-
-void    ft_eat(t_philo *philo);
-
-void    update_last_eat_time(t_philo *philo);
+int	ft_atoi(char *str);
+int check_args(char **av);

@@ -20,7 +20,17 @@ void ft_usleep(long sleep_duration)
 
 bool philo_died(t_philo *philo)
 {
-    if (get_time() - philo->last_eat_time > philo->data->time_to_die)
+    if ((get_time() - philo->last_eat_time > philo->data->time_to_die) && philo->state != EATING)
+    {
+        philo->state = DEAD;
         return (true);
+    }
     return (false);
+}
+
+void update_last_eat_time(t_philo *philo)
+{
+    pthread_mutex_lock(&philo->mutex_last_eat_time);
+    philo->last_eat_time = get_time();
+    pthread_mutex_unlock(&philo->mutex_last_eat_time);
 }

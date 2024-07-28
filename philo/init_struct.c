@@ -12,6 +12,7 @@ void init_philo(t_data *data)
         pthread_mutex_init(&data->forks[i], NULL);
         data->philo[i].left_fork = i;
         data->philo[i].right_fork = (i + data->n_philo - 1) % data->n_philo;
+        pthread_mutex_init(&data->philo[i].mutex_state, NULL);
         i++;
     }
 }

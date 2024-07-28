@@ -1,25 +1,23 @@
 #include "Philosophers.h"
 
-void ft_think(t_philo *philo)
+int ft_think(t_philo *philo)
 {
+    philo->state = THINKING;
+    if (get_philo_state(philo) == DEAD)
+        return 0;
     print_message(philo, "is thinking");
+    return 1;
 }
 
-void ft_sleep(t_philo *philo)
+int ft_sleep(t_philo *philo)
 {
+    philo->state = SLEEPING;
+    if (get_philo_state(philo) == DEAD)
+        return 0;
     print_message(philo, "is_sleeping");
     philo->last_eat_time = get_time();
     ft_usleep(philo->data->time_to_sleep);
-}
-
-void ft_eat(t_philo *philo)
-{
-    pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
-    pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-    print_message(philo, "is eating");
-    ft_usleep(philo->data->time_to_eat);
-    pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-    pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+    return 1;
 }
 
 void *routine(void *arg)
@@ -27,11 +25,17 @@ void *routine(void *arg)
     t_philo *philo;
 
     philo = (t_philo *)arg;
-    while (philo_died(philo) == true)
+    if (philo->id % 2 == 0)
+        ft_usleep(philo->data->time_to_eat);
+    while (philo_died(philo) != true)
     {
-        ft_think(philo);
-        ft_sleep(philo);
-        ft_eat(philo);
+        ft_eat(philo); 
+        if (!ft_sleep(philo))
+            break ;
+        if (philo_died(philo) == true)
+            break ;
+        if (!ft_think(philo))
+            break ;
     }
     return NULL;
 }
