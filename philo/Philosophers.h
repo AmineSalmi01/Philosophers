@@ -18,10 +18,10 @@ typedef struct s_philo {
     int id;
     int left_fork;
     int right_fork;
-    long last_eat_time;
-    t_data *data;
     pthread_mutex_t mutex_last_eat_time;
     pthread_mutex_t mutex_state;
+    long last_eat_time;
+    t_data *data;
     t_state state;
 } t_philo;
 
