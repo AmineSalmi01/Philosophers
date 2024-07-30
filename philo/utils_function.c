@@ -1,9 +1,17 @@
 #include "Philosophers.h"
 
+size_t time_passed(size_t start)
+{
+    size_t new;
+
+    new = get_time();
+    return (new - start);
+}
+
 void    print_message(t_philo *philo, char *message)
 {
     pthread_mutex_lock(&philo->data->print);
-    printf("Philosopher %d %s\n", philo->id, message);
+    printf("%zu  %d %s\n", time_passed(philo->data->start), philo->id, message);
     pthread_mutex_unlock(&philo->data->print);
 }
 

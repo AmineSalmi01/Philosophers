@@ -35,6 +35,7 @@ typedef struct s_data {
     pthread_t *threads;
     pthread_mutex_t print;
     bool philo_died;
+    size_t start;
     t_philo *philo;
 } t_data;
 
@@ -45,12 +46,12 @@ int     create_threads(t_data *data);
 void    print_message(t_philo *philo, char *message);
 
 void    ft_usleep(long sleep_duration);
-long    get_time(void);
+size_t    get_time(void);
 
 bool    philo_died(t_philo *philo);
 
 t_state get_philo_state(t_philo *philo);
-void    set_philo_state(t_philo *philo, t_state state);
+// void    set_philo_state(t_philo *philo, t_state state);
 
 void    ft_eat(t_philo *philo);
 

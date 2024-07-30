@@ -1,8 +1,8 @@
 #include "Philosophers.h"
 
-long get_time(void)
+size_t get_time(void)
 {
-    long time;
+    size_t time;
 
     struct timeval tv;
     gettimeofday(&tv, NULL);

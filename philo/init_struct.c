@@ -31,6 +31,8 @@ int init_data(t_data *data, char **av, int ac)
     data->time_to_eat = ft_atoi(av[3]);
     data->time_to_sleep = ft_atoi(av[4]);
     data->philo->last_eat_time = get_time();
+    data->start = get_time();
+    data->philo_died = false;
     data->nb_meals = -1;
     if (ac == 6)
         data->nb_meals = ft_atoi(av[5]);
