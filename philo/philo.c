@@ -10,19 +10,6 @@ void all()
 {
     system ("Leaks philo");
 }
-// int join_threads(t_data *data)
-// {
-//     int i;
-
-//     i = 0;
-//     while (i < data->n_philo)
-//     {
-//         if (pthread_join(data->threads[i], NULL) != 0)
-//             return 0;
-//         i++;
-//     }
-//     return 1;
-// }
 
 int main(int ac, char **av)
 {

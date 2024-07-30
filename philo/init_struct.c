@@ -13,6 +13,7 @@ void init_philo(t_data *data)
         data->philo[i].left_fork = i;
         data->philo[i].right_fork = (i + data->n_philo - 1) % data->n_philo;
         pthread_mutex_init(&data->philo[i].mutex_state, NULL);
+        data->philo[i].last_eat_time = get_time();
         i++;
     }
 }
@@ -30,7 +31,6 @@ int init_data(t_data *data, char **av, int ac)
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);
     data->time_to_sleep = ft_atoi(av[4]);
-    data->philo->last_eat_time = get_time();
     data->start = get_time();
     data->philo_died = false;
     data->nb_meals = -1;

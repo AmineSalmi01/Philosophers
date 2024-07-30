@@ -19,15 +19,15 @@ void *routine(void *arg)
 
     philo = (t_philo *)arg;
     if (philo->id % 2 == 0)
-        ft_usleep(philo->data->time_to_sleep);
+        ft_usleep(philo->data->time_to_eat / 2);
     while (1)
     {
-        // if (philo_died(philo) == true)
-        // {
-        //     philo->data->philo_died = true;
-        //     print_message(philo, "is died");
-        //     break ;
-        // }
+        if (philo_died(philo) == true)
+        {
+            philo->data->philo_died = true;
+            print_message(philo, "is died");
+            break ;
+        }
         ft_eat(philo);
         ft_think(philo);
         ft_sleep(philo);
@@ -47,18 +47,20 @@ int create_threads(t_data *data)
         i++;
     }
     i = 0;
+    // while (i < data->n_philo)
+    // {
+    //     if (data->philo_died == false)
+    //         philo_died(data->philo);
+    //     i++;
+    // }
+    // i = 0;
     while (i < data->n_philo)
     {
         if (pthread_join(data->threads[i], NULL) != 0)
             return 0;
+        if (philo_died(&data->philo[i]))
+            data->philo_died = true;
         i++;
     }
-
-    // while (i < data->n_philo)
-    // {
-    //     if (data->philo_died == true)
-    //         break ;
-    //     i++;
-    // }
     return 1;
 }

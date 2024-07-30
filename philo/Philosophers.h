@@ -20,7 +20,7 @@ typedef struct s_philo {
     int right_fork;
     pthread_mutex_t mutex_last_eat_time;
     pthread_mutex_t mutex_state;
-    long last_eat_time;
+    size_t last_eat_time;
     t_data *data;
     t_state state;
 } t_philo;
@@ -51,7 +51,6 @@ size_t    get_time(void);
 bool    philo_died(t_philo *philo);
 
 t_state get_philo_state(t_philo *philo);
-// void    set_philo_state(t_philo *philo, t_state state);
 
 void    ft_eat(t_philo *philo);
 
