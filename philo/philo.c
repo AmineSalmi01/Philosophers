@@ -47,7 +47,7 @@ int main(int ac, char **av)
     else
     {
         if (!create_threads(&data))
-            return 0;
+            return 1;
     }
     free_data(&data);
 }

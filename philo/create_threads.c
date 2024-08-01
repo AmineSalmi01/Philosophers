@@ -22,7 +22,7 @@ void *routine(void *arg)
         ft_usleep(philo->data->time_to_eat);
     while (1)
     {
-        if (philo->data->philo_died == true || philo->n_meals >= philo->data->nb_meals)
+        if (philo->data->philo_died == true)
             break ;
         ft_eat(philo);
         ft_think(philo);
@@ -38,8 +38,6 @@ int check_all_philo_ate(t_data *data)
 
     i = 0;
     count_meals = 0;
-    // if (data->nb_meals == -1)
-        // return 1;
     while (i < data->n_philo)
     {
         if (data->philo[i].n_meals >= data->nb_meals) 
@@ -68,8 +66,8 @@ int monitor(t_data *data)
         }
         i++;
     }
-    if (check_all_philo_ate(data) == 1)
-        return 1;
+    // if (check_all_philo_ate(data) == 1)
+    //     return 1;
     return 0;
 }
 
@@ -88,7 +86,7 @@ int create_threads(t_data *data)
     while (1)
     {
         if (monitor(data) != 0)
-            break ;
+            return 0;
     }
     while (i < data->n_philo)
     {
