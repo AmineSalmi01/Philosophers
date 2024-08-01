@@ -10,15 +10,23 @@ size_t get_time(void)
     return (time);
 }
 
-t_state get_philo_state(t_philo *philo)
-{
-    t_state state;
+// t_state get_philo_state(t_philo *philo)
+// {
+//     t_state state;
 
-    pthread_mutex_lock(&philo->mutex_state);
-    state = philo->state;
-    pthread_mutex_lock(&philo->mutex_state);
-    return (state);
-}
+//     pthread_mutex_lock(&philo->mutex_state);
+//     state = philo->state;
+//     pthread_mutex_lock(&philo->mutex_state);
+//     return (state);
+// }
+
+// void set_philo_state(t_philo *philo, t_state state)
+// {
+//     pthread_mutex_lock(&philo->mutex_state);
+//     if (philo->state != DEAD)
+//         philo->state = state;
+//     pthread_mutex_unlock(&philo->mutex_state);
+// }
 
 // long get_last_eat_time(t_data *philo)
 // {

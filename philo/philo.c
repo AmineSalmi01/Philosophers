@@ -1,6 +1,26 @@
 #include "Philosophers.h"
 
-void free_philo(t_data *data)
+void *one_philo_routine(void *arg)
+{
+    t_data *data;
+
+    data = (t_data *)arg;
+    pthread_mutex_lock(&data->forks[0]);
+    print_message(data->philo, "has taken a fork");
+    pthread_mutex_unlock(&data->forks[0]);
+    ft_usleep(data->time_to_die);
+    printf("%zu  %d is died\n", time_passed(data->start), data->philo->id);
+    return NULL;
+}
+
+int one_philo(t_data *data)
+{
+    pthread_create(&data->threads[0], NULL, one_philo_routine, data);
+    pthread_join(data->threads[0], NULL);
+    return 0;
+}
+
+void free_data(t_data *data)
 {
     free(data->philo);
     free(data->threads);
@@ -22,7 +42,12 @@ int main(int ac, char **av)
         return 1;
     if (!init_data(&data, av, ac))
         return 1;
-    if (!create_threads(&data))
-        return 1;
-    free_philo(&data);
+    if (data.n_philo == 1)
+        one_philo(&data);
+    else
+    {
+        if (!create_threads(&data))
+            return 0;
+    }
+    free_data(&data);
 }

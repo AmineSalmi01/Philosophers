@@ -8,10 +8,23 @@ size_t time_passed(size_t start)
     return (new - start);
 }
 
+bool get_state(t_data *data)
+{
+    bool res;
+
+    pthread_mutex_lock(&data->mut_died);
+    res = data->philo_died;
+    pthread_mutex_unlock(&data->mut_died);
+    return res;
+}
+
 void    print_message(t_philo *philo, char *message)
 {
     pthread_mutex_lock(&philo->data->print);
-    printf("%zu  %d %s\n", time_passed(philo->data->start), philo->id, message);
+    if (!get_state(philo->data))
+    {
+        printf("%zu  %d %s\n", time_passed(philo->data->start), philo->id, message);
+    }
     pthread_mutex_unlock(&philo->data->print);
 }
 
@@ -38,12 +51,11 @@ bool philo_died(t_philo *philo)
 {
     // size_t current_time = get_time();
     // size_t time_diff = current_time - philo->last_eat_time;
-    // printf("Philosopher %d checking death. Current time: %zu, Last eat time: %zu, Time to die: %d, Time diff: %zu\n",
-            // philo->id, current_time, philo->last_eat_time, philo->data->time_to_die, time_diff);    
+
     if (get_time() - philo->last_eat_time >= philo->data->time_to_die)
     {
-        philo->data->philo_died = true;
-        return (true);
+        // set_philo_state(philo, DEAD);
+        return true;
     }
-    return (false);
+    return false;
 }

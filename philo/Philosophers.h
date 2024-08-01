@@ -7,22 +7,22 @@
 
 typedef struct s_data t_data;
 
-typedef enum e_state {
-    THINKING,
-    SLEEPING,
-    EATING,
-    DEAD
-} t_state;
+// typedef enum e_state {
+//     THINKING,
+//     SLEEPING,
+//     EATING,
+//     DEAD
+// } t_state;
 
 typedef struct s_philo {
     int id;
     int left_fork;
     int right_fork;
+    int n_meals;
     pthread_mutex_t mutex_last_eat_time;
     pthread_mutex_t mutex_state;
     size_t last_eat_time;
     t_data *data;
-    t_state state;
 } t_philo;
 
 typedef struct s_data {
@@ -34,7 +34,9 @@ typedef struct s_data {
     pthread_mutex_t *forks;
     pthread_t *threads;
     pthread_mutex_t print;
+    pthread_mutex_t mut_died;
     bool philo_died;
+    int check_meals;
     size_t start;
     t_philo *philo;
 } t_data;
@@ -47,11 +49,14 @@ void    print_message(t_philo *philo, char *message);
 
 void    ft_usleep(long sleep_duration);
 size_t    get_time(void);
+// void set_philo_state(t_philo *philo, t_state state);
 
 bool    philo_died(t_philo *philo);
 
-t_state get_philo_state(t_philo *philo);
+// t_state get_philo_state(t_philo *philo);
 
 void    ft_eat(t_philo *philo);
 
 void    update_last_eat_time(t_philo *philo);
+
+size_t time_passed(size_t start);
