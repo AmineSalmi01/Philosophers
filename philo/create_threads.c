@@ -1,18 +1,5 @@
 #include "Philosophers.h"
 
-int ft_think(t_philo *philo)
-{
-    print_message(philo, "is thinking");
-    return 1;
-}
-
-int ft_sleep(t_philo *philo)
-{
-    print_message(philo, "is sleeping");
-    ft_usleep(philo->data->time_to_sleep);
-    return 1;
-}
-
 void *routine(void *arg)
 {
     t_philo *philo;
@@ -22,8 +9,13 @@ void *routine(void *arg)
         ft_usleep(philo->data->time_to_eat);
     while (1)
     {
-        if (philo->data->philo_died == true)
+        pthread_mutex_lock(&philo->data->mut_check_meals);
+        if (get_state(philo->data) == true || philo->data->check_meals == true)
+        {
+            pthread_mutex_unlock(&philo->data->mut_check_meals);
             break ;
+        }
+        pthread_mutex_unlock(&philo->data->mut_check_meals);
         ft_eat(philo);
         ft_think(philo);
         ft_sleep(philo);
@@ -40,12 +32,17 @@ int check_all_philo_ate(t_data *data)
     count_meals = 0;
     while (i < data->n_philo)
     {
-        if (data->philo[i].n_meals >= data->nb_meals) 
+        if (get_n_meals(&data->philo[i]) >= data->nb_meals) 
             count_meals++;
         i++;
     }
     if (count_meals == data->n_philo)
+    {
+        pthread_mutex_lock(&data->mut_check_meals);
+        data->check_meals = true;
+        pthread_mutex_unlock(&data->mut_check_meals);
         return 1;
+    }
     return 0;
 }
 
@@ -66,8 +63,11 @@ int monitor(t_data *data)
         }
         i++;
     }
-    // if (check_all_philo_ate(data) == 1)
-    //     return 1;
+    if (data->nb_meals != -1)
+    {
+        if (check_all_philo_ate(data) == 1)
+            return 1;
+    }
     return 0;
 }
 
@@ -86,7 +86,7 @@ int create_threads(t_data *data)
     while (1)
     {
         if (monitor(data) != 0)
-            return 0;
+            break ;
     }
     while (i < data->n_philo)
     {

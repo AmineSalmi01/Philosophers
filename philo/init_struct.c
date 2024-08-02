@@ -12,7 +12,9 @@ void init_philo(t_data *data)
         pthread_mutex_init(&data->forks[i], NULL);
         data->philo[i].left_fork = i;
         data->philo[i].right_fork = (i + data->n_philo - 1) % data->n_philo;
-        pthread_mutex_init(&data->philo[i].mutex_state, NULL);
+        // pthread_mutex_init(&data->philo[i].mutex_state, NULL);
+        pthread_mutex_init(&data->philo[i].mutex_last_eat_time, NULL);
+        pthread_mutex_init(&data->philo[i].mutex_n_meals, NULL);
         data->philo[i].last_eat_time = get_time();
         data->philo[i].n_meals = 0;
         i++;
@@ -36,11 +38,13 @@ int init_data(t_data *data, char **av, int ac)
         return 0;
     data->start = get_time();
     data->philo_died = false;
-    data->check_meals = 0;
+    data->check_meals = false;
     data->nb_meals = -1;
     if (ac == 6)
         data->nb_meals = ft_atoi(av[5]);
     pthread_mutex_init(&data->print, NULL);
+    pthread_mutex_init(&data->mut_died, NULL);
+    pthread_mutex_init(&data->mut_check_meals, NULL);
     init_philo(data);
     return 1;
 }

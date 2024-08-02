@@ -22,10 +22,23 @@ int one_philo(t_data *data)
 
 void free_data(t_data *data)
 {
+    int i;
+
+    i = -1;
+    while (++i < data->n_philo)
+    {
+        pthread_mutex_destroy(&data->forks[i]);
+        pthread_mutex_destroy(&data->philo[i].mutex_last_eat_time);
+        pthread_mutex_destroy(&data->philo[i].mutex_n_meals);
+    }
+    pthread_mutex_destroy(&data->print);
+    pthread_mutex_destroy(&data->mut_died);
+    pthread_mutex_destroy(&data->mut_check_meals);
     free(data->philo);
     free(data->threads);
     free(data->forks);
 }
+
 void all()
 {
     system ("Leaks philo");
@@ -33,7 +46,7 @@ void all()
 
 int main(int ac, char **av)
 {
-    // atexit(all);
+    atexit(all);
     t_data data;
 
     if (ac != 5 && ac != 6) 
