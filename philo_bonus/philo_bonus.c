@@ -1,9 +1,9 @@
 #include "Philosophers_bonus.h"
 
-void routine(t_data *data)
-{
-    
-}
+// void routine(t_data *data)
+// {
+
+// }
 
 int create_philos(t_data *data)
 {
@@ -44,4 +44,6 @@ int main(int ac, char **av)
         return (1);
     if (!create_philos(&data))
         return (1);
+    for (int i = 0; i < data.n_philo; i++)
+        printf("Philo [%d]\n", data.philo[i].id);
 }

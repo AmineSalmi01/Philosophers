@@ -8,7 +8,8 @@ void init_philo(t_data *data)
     while (i < data->n_philo)
     {
         data->philo[i].id = i + 1;
-        data->philo->data = data;
+        data->philo[i].data = data;
+        i++;
     }
 }
 
@@ -25,6 +26,7 @@ int init_data(t_data *data, char **av, int ac)
         data->time_to_die < 60 || data->time_to_eat < 60 || 
         data->time_to_sleep < 60 || data->nb_meals == 0)
         return 0;
+    data->philo = malloc(sizeof(t_philo) * (data->n_philo));
     init_philo(data);
     return 1;
 }
