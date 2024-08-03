@@ -1,17 +1,17 @@
-NAME = philo
-CC = cc 
+NAME = philo_bonus
+CC = cc
 CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
 RM = rm -rf
 
-SRC = check_args.c ft_atoi.c philo.c getters.c philo_actions.c create_threads.c init_structs.c philo_utils.c
+SRC = check_args_bonus.c ft_atoi_bonus.c philo_bonus.c init_structs_bonus.c
 OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) Philosophers.h
+$(NAME) : $(OBJS) Philosophers_bonus.h
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-%.o : %.c Philosophers.h
+%.o : %.c Philosophers_bonus.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
