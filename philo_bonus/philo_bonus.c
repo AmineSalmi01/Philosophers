@@ -1,8 +1,12 @@
 #include "Philosophers_bonus.h"
 
-// void routine(t_data *data)
+// void routine(t_philo *philo)
 // {
-
+//     t_philo *philo = philo;
+//     while (1)
+//     {
+//         ft_think(philo);
+//     }
 // }
 
 int create_philos(t_data *data)
@@ -17,7 +21,9 @@ int create_philos(t_data *data)
             return (0);
         if (pid == 0)
         {
-            printf("<----- here ---->\n");
+            printf("Philo ----- %d\nLeft fork: %d\nRight fork %d\n", 
+                    data->philo[i].id, data->philo[i].left_fork + 1, data->philo[i].right_fork);
+            // routine(&data->philo[i]);
             exit(EXIT_SUCCESS);
         }
         i++;
@@ -44,6 +50,5 @@ int main(int ac, char **av)
         return (1);
     if (!create_philos(&data))
         return (1);
-    for (int i = 0; i < data.n_philo; i++)
-        printf("Philo [%d]\n", data.philo[i].id);
+    printf("time: %ld\n", get_time());
 }

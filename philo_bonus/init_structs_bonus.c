@@ -27,6 +27,7 @@ int init_data(t_data *data, char **av, int ac)
         data->time_to_sleep < 60 || data->nb_meals == 0)
         return 0;
     data->philo = malloc(sizeof(t_philo) * (data->n_philo));
+    data->start = get_time();
     init_philo(data);
     return 1;
 }
