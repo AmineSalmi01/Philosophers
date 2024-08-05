@@ -2,27 +2,25 @@
 
 void routine(t_philo *philo)
 {
-    // t_philo *philo = philo;
+    if ((philo->id % 2) == 0)
+        ft_usleep(philo->data->time_to_sleep);
     while (1)
     {
         ft_think(philo);
     }
 }
 
-int create_philos(t_data *data)
+int create_process(t_data *data)
 {
     int i;
-    pid_t pid;
     i = 0;
     while (i < data->n_philo)
     {
-        pid = fork();
-        if (pid < 0)
+        data->philo[i].pid = fork();
+        if (data->philo[i].pid < 0)
             return (0);
-        if (pid == 0)
+        if (data->philo[i].pid == 0)
         {
-            // printf("Philo ----- %d\nLeft fork: %d\nRight fork %d\n", 
-            //         data->philo[i].id, data->philo[i].left_fork + 1, data->philo[i].right_fork);
             routine(&data->philo[i]);
             exit(EXIT_SUCCESS);
         }
@@ -39,7 +37,6 @@ int create_philos(t_data *data)
 
 int main(int ac, char **av)
 {
-    // atexit(all);
     t_data data;
 
     if (ac != 5 && ac != 6) 
@@ -48,7 +45,6 @@ int main(int ac, char **av)
         return (1);
     if (!init_data(&data, av, ac))
         return (1);
-    if (!create_philos(&data))
+    if (!create_process(&data))
         return (1);
-    printf("time: %ld\n", get_time());
 }

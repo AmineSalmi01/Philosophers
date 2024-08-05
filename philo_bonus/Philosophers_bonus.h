@@ -4,12 +4,14 @@
 #include <stdbool.h>
 #include <pthread.h>
 #include <sys/time.h>
+#include <semaphore.h>
 
 typedef struct s_data t_data;
 
 typedef struct s_philo {
     int id;
     int n_meals;
+    pid_t pid;
     t_data *data;
 } t_philo;
 
@@ -30,3 +32,4 @@ void print_message(t_philo *philo, char *message);
 int ft_think(t_philo *philo);
 size_t get_time(void);
 size_t time_passed(size_t start);
+void ft_usleep(size_t sleep_duration);
