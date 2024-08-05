@@ -6,7 +6,7 @@ void *routine(void *arg)
 
     philo = (t_philo *)arg;
     if (philo->id % 2 == 0)
-        ft_usleep(philo->data->time_to_eat);
+        ft_usleep(philo->data->time_to_sleep);
     while (1)
     {
         pthread_mutex_lock(&philo->data->mut_check_meals);

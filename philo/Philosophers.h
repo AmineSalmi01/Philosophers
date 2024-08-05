@@ -14,7 +14,6 @@ typedef struct s_philo {
     int n_meals;
     pthread_mutex_t mutex_n_meals;
     pthread_mutex_t mutex_last_eat_time;
-    // pthread_mutex_t mutex_state;
     size_t last_eat_time;
     t_data *data;
 } t_philo;
