@@ -6,7 +6,13 @@ void routine(t_philo *philo)
         ft_usleep(philo->data->time_to_sleep);
     while (1)
     {
+        // if (philo_died(philo) == true)
+        // {
+        //     exit(1);
+        // }
         ft_think(philo);
+        ft_eat(philo);
+        ft_sleep(philo);
     }
 }
 
@@ -16,10 +22,10 @@ int create_process(t_data *data)
     i = 0;
     while (i < data->n_philo)
     {
-        data->philo[i].pid = fork();
-        if (data->philo[i].pid < 0)
+        data->pid[i] = fork();
+        if (data->pid[i] < 0)
             return (0);
-        if (data->philo[i].pid == 0)
+        if (data->pid[i] == 0)
         {
             routine(&data->philo[i]);
             exit(EXIT_SUCCESS);
@@ -46,5 +52,5 @@ int main(int ac, char **av)
     if (!init_data(&data, av, ac))
         return (1);
     if (!create_process(&data))
-        return (1);
+        return (sem_close(data.forks), 1);
 }

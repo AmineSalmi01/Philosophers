@@ -15,6 +15,7 @@ void init_philo(t_data *data)
 
 int init_data(t_data *data, char **av, int ac)
 {
+    sem_unlink("/forks");
     data->n_philo = ft_atoi(av[1]);
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);
@@ -27,7 +28,10 @@ int init_data(t_data *data, char **av, int ac)
         data->time_to_sleep < 60 || data->nb_meals == 0)
         return 0;
     data->philo = malloc(sizeof(t_philo) * (data->n_philo));
+    data->pid = malloc(sizeof(int) * (data->n_philo));
     data->start = get_time();
+    data->forks = sem_open("/forks", O_EXCL | O_CREAT, 0640, data->n_philo);
+    data->print = sem_open("/print", O_EXCL | O_CREAT, 0640, 1);
     init_philo(data);
     return 1;
 }

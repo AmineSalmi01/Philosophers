@@ -16,8 +16,8 @@ void *routine(void *arg)
             break ;
         }
         pthread_mutex_unlock(&philo->data->mut_check_meals);
-        ft_eat(philo);
         ft_think(philo);
+        ft_eat(philo);
         ft_sleep(philo);
     }
     return NULL;
