@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:10:44 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 19:57:30 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/07 21:54:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_eat(t_philo *philo)
 	update_last_eat_time(philo);
 	update_number_meals(philo);
 	ft_usleep(philo->data->time_to_eat);
+	// printf("----- im here ----- \n");
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
 }

@@ -11,7 +11,7 @@ void	*monitore(void *param)
 	{
 		if (philo_died(philo) == true)
 		{
-			sem_wait(philo->data->print);
+			// sem_wait(philo->data->print);
 			printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, "is died");
 			exit(EXIT_FAILURE);
 		}
