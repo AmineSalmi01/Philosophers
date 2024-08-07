@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:29 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:11:57 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/07 15:43:42 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	update_number_meals(t_philo *philo)
 
 bool	philo_died(t_philo *philo)
 {
-	// sem_wait(philo->data->sem_last_eat);
+	sem_wait(philo->data->sem_last_eat);
 	if (get_time() - philo->last_eat_time >= philo->data->time_to_die)
 	{
-		// sem_post(philo->data->sem_last_eat);
+		sem_post(philo->data->sem_last_eat);
 		return (true);
 	}
-	// sem_post(philo->data->sem_last_eat);
+	sem_post(philo->data->sem_last_eat);
 	return (false);
 }

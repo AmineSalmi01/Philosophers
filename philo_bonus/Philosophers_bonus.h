@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:12:06 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:13:37 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:57:26 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	sem_t				*forks;
 	sem_t				*print;
 	sem_t				*sem_last_eat;
+	sem_t				*stop_start;
 	t_philo				*philo;
 }						t_data;
 
@@ -64,5 +65,6 @@ bool	philo_died(t_philo *philo);
 
 void	update_last_eat_time(t_philo *philo);
 void	update_number_meals(t_philo *philo);
+int     create_process(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:10:24 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:10:25 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:58:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	unlink_all(void)
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/last_eat");
+	sem_unlink("/stop_start");
 }
 
 int	init_data(t_data *data, char **av, int ac)
@@ -54,6 +55,7 @@ int	init_data(t_data *data, char **av, int ac)
 	data->forks = sem_open("/forks", O_EXCL | O_CREAT, 0640, data->n_philo);
 	data->print = sem_open("/print", O_EXCL | O_CREAT, 0640, 1);
 	data->sem_last_eat = sem_open("/last_eat", O_EXCL | O_CREAT, 0640, 1);
+	data->stop_start = sem_open("/stop_start", O_EXCL | O_CREAT, 0640, 0);
 	data->philo_died = false;
 	data->check_meals = false;
 	init_philo(data);
