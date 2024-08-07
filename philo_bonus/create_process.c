@@ -11,8 +11,8 @@ void	*monitore(void *param)
 	{
 		if (philo_died(philo) == true)
 		{
-			philo->data->philo_died = true;
-			print_message(philo, "is died");
+			sem_wait(philo->data->print);
+			printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, "is died");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -32,10 +32,10 @@ void	routine(t_philo *philo)
 		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
-		if (philo->data->nb_meals != -1)
+		if (philo->data->nb_meals != -1 && philo->n_meals >= philo->data->nb_meals)
 		{
-			if (philo->n_meals >= philo->data->nb_meals)
-				exit (0);
+			printf("----- %d out number of %d n_meals -----\n", philo->id, philo->n_meals);
+			exit(EXIT_SUCCESS);
 		}
 	}
 	pthread_join(thread, NULL);
@@ -52,7 +52,7 @@ int	create_process(t_data *data)
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] < 0)
-			return (0);
+			exit(1);
 		if (data->pid[i] == 0)
 		{
 			routine(&data->philo[i]);
