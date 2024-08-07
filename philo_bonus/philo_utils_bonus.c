@@ -1,43 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/07 12:11:29 by asalmi            #+#    #+#             */
+/*   Updated: 2024/08/07 12:11:57 by asalmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Philosophers_bonus.h"
 
-size_t time_passed(size_t start)
+size_t	time_passed(size_t start)
 {
-    size_t new;
+	size_t	new;
 
-    new = get_time();
-    return (new - start);
+	new = get_time();
+	return (new - start);
 }
 
-void ft_usleep(size_t sleep_duration)
+void	ft_usleep(size_t sleep_duration)
 {
-    size_t start = get_time();
-    size_t end = start + sleep_duration;
+	size_t	start;
+	size_t	end;
 
-    while (get_time() < end)
-    {
-        usleep(200);
-    }
-}
-void update_last_eat_time(t_philo *philo)
-{
-    sem_wait(philo->data->sem_last_eat);
-    philo->last_eat_time = get_time();
-    sem_post(philo->data->sem_last_eat);
+	start = get_time();
+	end = start + sleep_duration;
+	while (get_time() < end)
+	{
+		usleep(200);
+	}
 }
 
-void update_number_meals(t_philo *philo)
+void	update_last_eat_time(t_philo *philo)
 {
-    philo->n_meals++;
+	sem_wait(philo->data->sem_last_eat);
+	philo->last_eat_time = get_time();
+	sem_post(philo->data->sem_last_eat);
 }
 
-bool philo_died(t_philo *philo)
+void	update_number_meals(t_philo *philo)
 {
-    // sem_wait(philo->data->sem_last_eat);
-    if (get_time() - philo->last_eat_time >= philo->data->time_to_die)
-    {
-        // sem_post(philo->data->sem_last_eat);
-        return true;
-    }
-    // sem_post(philo->data->sem_last_eat);
-    return false;
+	philo->n_meals++;
+}
+
+bool	philo_died(t_philo *philo)
+{
+	// sem_wait(philo->data->sem_last_eat);
+	if (get_time() - philo->last_eat_time >= philo->data->time_to_die)
+	{
+		// sem_post(philo->data->sem_last_eat);
+		return (true);
+	}
+	// sem_post(philo->data->sem_last_eat);
+	return (false);
 }
