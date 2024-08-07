@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include <semaphore.h>
+#include <signal.h>
 
 typedef struct s_data t_data;
 
@@ -23,8 +24,11 @@ typedef struct s_data {
     size_t start;
     int nb_meals;
     int *pid;
+    bool philo_died;
+    bool check_meals;
     sem_t *forks;
     sem_t *print;
+    sem_t *sem_last_eat;
     t_philo *philo;
 } t_data;
 
@@ -40,3 +44,6 @@ void ft_eat(t_philo *philo);
 void ft_think(t_philo *philo);
 void ft_sleep(t_philo *philo);
 bool philo_died(t_philo *philo);
+
+void update_last_eat_time(t_philo *philo);
+void update_number_meals(t_philo *philo);

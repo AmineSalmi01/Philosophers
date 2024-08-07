@@ -18,7 +18,8 @@ void ft_eat(t_philo *philo)
        print_message(philo, "has taken a fork");
        print_message(philo, "has taken a fork");
        print_message(philo, "is eating");
-       philo->last_eat_time = get_time();
+       update_last_eat_time(philo);
+       update_number_meals(philo);
        ft_usleep(philo->data->time_to_eat);
        sem_post(philo->data->forks);
        sem_post(philo->data->forks);

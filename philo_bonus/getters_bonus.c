@@ -13,6 +13,12 @@ size_t get_time(void)
 void print_message(t_philo *philo, char *message)
 {
     sem_wait(philo->data->print);
-    printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, message);
+    if (philo->data->philo_died == false)
+        printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, message);
+    if (philo->data->philo_died == true)
+    {
+        printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, message);
+        exit(1);
+    }
     sem_post(philo->data->print);
 }

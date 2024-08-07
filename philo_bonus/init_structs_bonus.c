@@ -9,13 +9,22 @@ void init_philo(t_data *data)
     {
         data->philo[i].id = i + 1;
         data->philo[i].data = data;
+        data->philo[i].last_eat_time = data->start;
+        data->philo[i].n_meals = 0;
         i++;
     }
 }
 
-int init_data(t_data *data, char **av, int ac)
+void unlink_all(void)
 {
     sem_unlink("/forks");
+    sem_unlink("/print");
+    sem_unlink("/last_eat");
+}
+
+int init_data(t_data *data, char **av, int ac)
+{
+    unlink_all();
     data->n_philo = ft_atoi(av[1]);
     data->time_to_die = ft_atoi(av[2]);
     data->time_to_eat = ft_atoi(av[3]);
@@ -32,6 +41,9 @@ int init_data(t_data *data, char **av, int ac)
     data->start = get_time();
     data->forks = sem_open("/forks", O_EXCL | O_CREAT, 0640, data->n_philo);
     data->print = sem_open("/print", O_EXCL | O_CREAT, 0640, 1);
+    data->sem_last_eat = sem_open("/last_eat", O_EXCL | O_CREAT, 0640, 1);
+    data->philo_died = false;
+    data->check_meals = false;
     init_philo(data);
     return 1;
 }
