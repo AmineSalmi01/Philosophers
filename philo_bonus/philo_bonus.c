@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 17:38:55 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:23:45 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,36 @@ void one_philo(t_data *data)
 	else
 		wait(NULL);
 }
+void free_data(t_data *data)
+{
+	sem_close(data->forks);
+	sem_close(data->print);
+	sem_close(data->sem_last_eat);
+	sem_close(data->stop_start);
+	sem_close(data->sem_nb_meals);
+	free(data->philo);
+	free(data->pid);
+}
+
+void ll()
+{
+	system("leaks philo_bonus");
+}
 
 int	main(int ac, char **av)
 {
 	t_data data;
 
+	// atexit(ll);
 	if (ac != 5 && ac != 6)
 		return (1);
 	if (!check_args(av))
 		return (1);
 	if (!init_data(&data, av, ac))
+	{
+		free_data(&data);
 		return (1);
+	}
 	if (data.n_philo == 1)
 		one_philo(&data);
 	else
@@ -49,4 +68,5 @@ int	main(int ac, char **av)
 		if (!create_process(&data))
 			return (1);
 	}
+	free_data(&data);
 }

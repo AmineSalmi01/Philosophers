@@ -1,59 +1,77 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <pthread.h>
-#include <sys/time.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/07 11:22:25 by asalmi            #+#    #+#             */
+/*   Updated: 2024/08/08 15:52:26 by asalmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct s_data t_data;
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-typedef struct s_philo {
-    int id;
-    int left_fork;
-    int right_fork;
-    int n_meals;
-    pthread_mutex_t mutex_n_meals;
-    pthread_mutex_t mutex_last_eat_time;
-    size_t last_eat_time;
-    t_data *data;
-} t_philo;
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-typedef struct s_data {
-    int n_philo;
-    size_t time_to_die;
-    size_t time_to_eat;
-    size_t time_to_sleep;
-    int nb_meals;
-    pthread_mutex_t *forks;
-    pthread_t *threads;
-    pthread_mutex_t print;
-    pthread_mutex_t mut_died;
-    pthread_mutex_t mut_check_meals;
-    bool philo_died;
-    bool check_meals;
-    size_t start;
-    t_philo *philo;
-} t_data;
+typedef struct s_data	t_data;
 
-int     ft_atoi(char *str);
-int     check_args(char **av);
-int     init_data(t_data *data, char **av, int ac);
-int     create_threads(t_data *data);
-void    print_message(t_philo *philo, char *message);
+typedef struct s_philo
+{
+	int					id;
+	int					left_fork;
+	int					right_fork;
+	int					n_meals;
+	pthread_mutex_t		mutex_n_meals;
+	pthread_mutex_t		mutex_last_eat_time;
+	size_t				last_eat_time;
+	t_data				*data;
+}						t_philo;
 
-int ft_think(t_philo *philo);
-int ft_sleep(t_philo *philo);
+typedef struct s_data
+{
+	int					n_philo;
+	size_t				time_to_die;
+	size_t				time_to_eat;
+	size_t				time_to_sleep;
+	int					nb_meals;
+	pthread_mutex_t		*forks;
+	pthread_t			*threads;
+	pthread_mutex_t		print;
+	pthread_mutex_t		mut_died;
+	pthread_mutex_t		mut_check_meals;
+	bool				philo_died;
+	bool				check_meals;
+	size_t				start;
+	t_philo				*philo;
+}						t_data;
 
-void    ft_usleep(size_t sleep_duration);
-size_t    get_time(void);
-int get_n_meals(t_philo *philo);
-bool get_state(t_data *data);
+int		ft_atoi(char *str);
+int		check_args(char **av);
+int		init_data(t_data *data, char **av, int ac);
+int		create_threads(t_data *data);
+void	print_message(t_philo *philo, char *message);
 
-bool    philo_died(t_philo *philo);
+int		ft_think(t_philo *philo);
+int		ft_sleep(t_philo *philo);
+void	ft_eat(t_philo *philo);
 
-void    ft_eat(t_philo *philo);
+void	ft_usleep(size_t sleep_duration);
+size_t	get_time(void);
+int		get_n_meals(t_philo *philo);
+bool	get_state(t_data *data);
 
-void    update_last_eat_time(t_philo *philo);
-void update_number_meals(t_philo *philo);
+bool	philo_died(t_philo *philo);
 
-size_t time_passed(size_t start);
+void	update_last_eat_time(t_philo *philo);
+void	update_number_meals(t_philo *philo);
+
+size_t	time_passed(size_t start);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:10:24 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 18:47:37 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:18:48 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	unlink_all(void)
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/last_eat");
+	sem_unlink("/stop_start");
 	sem_unlink("/meals");
 }
 

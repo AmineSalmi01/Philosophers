@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:29 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 21:55:03 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 15:04:54 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,25 @@ void	ft_usleep(size_t sleep_duration)
 void	update_last_eat_time(t_philo *philo)
 {
 	sem_wait(philo->data->sem_last_eat);
-	// printf("");
 	philo->last_eat_time = get_time();
-	// printf("");
 	sem_post(philo->data->sem_last_eat);
 }
 
 void	update_number_meals(t_philo *philo)
 {
-	// sem_wait(philo->data->sem_nb_meals);
-	// printf("");
+	sem_wait(philo->data->sem_nb_meals);
 	philo->n_meals++;
-	// printf("");
-	// sem_post(philo->data->sem_nb_meals);
+	sem_post(philo->data->sem_nb_meals);
 }
 
 bool	philo_died(t_philo *philo)
 {
-	// sem_wait(philo->data->sem_last_eat);
-	// printf("");
+	sem_wait(philo->data->sem_last_eat);
 	if (get_time() - philo->last_eat_time >= philo->data->time_to_die)
 	{
-		// sem_post(philo->data->sem_last_eat);
+		sem_post(philo->data->sem_last_eat);
 		return (true);
 	}
-	// printf("");
-	// sem_post(philo->data->sem_last_eat);
+	sem_post(philo->data->sem_last_eat);
 	return (false);
 }

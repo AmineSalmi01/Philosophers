@@ -11,10 +11,11 @@ void	*monitore(void *param)
 	{
 		if (philo_died(philo) == true)
 		{
-			// sem_wait(philo->data->print);
+			sem_wait(philo->data->print);
 			printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, "is died");
 			exit(EXIT_FAILURE);
 		}
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -34,7 +35,6 @@ void	routine(t_philo *philo)
 		ft_sleep(philo);
 		if (philo->data->nb_meals != -1 && philo->n_meals >= philo->data->nb_meals)
 		{
-			printf("----- %d out number of %d n_meals -----\n", philo->id, philo->n_meals);
 			exit(EXIT_SUCCESS);
 		}
 	}

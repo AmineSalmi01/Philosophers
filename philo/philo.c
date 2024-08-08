@@ -1,66 +1,81 @@
-#include "Philosophers.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/07 11:22:08 by asalmi            #+#    #+#             */
+/*   Updated: 2024/08/08 15:24:51 by asalmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void *one_philo_routine(void *arg)
+#include "philosophers.h"
+
+void	*one_philo_routine(void *arg)
 {
-    t_data *data;
+	t_data	*data;
 
-    data = (t_data *)arg;
-    pthread_mutex_lock(&data->forks[0]);
-    print_message(data->philo, "has taken a fork");
-    pthread_mutex_unlock(&data->forks[0]);
-    ft_usleep(data->time_to_die);
-    printf("%zu  %d is died\n", time_passed(data->start), data->philo->id);
-    return NULL;
+	data = (t_data *)arg;
+	pthread_mutex_lock(&data->forks[0]);
+	print_message(data->philo, "has taken a fork");
+	pthread_mutex_unlock(&data->forks[0]);
+	ft_usleep(data->time_to_die);
+	printf("%zu  %d is died\n", time_passed(data->start), data->philo->id);
+	return (NULL);
 }
 
-int one_philo(t_data *data)
+int	one_philo(t_data *data)
 {
-    pthread_create(&data->threads[0], NULL, one_philo_routine, data);
-    pthread_join(data->threads[0], NULL);
-    return 0;
+	pthread_create(&data->threads[0], NULL, one_philo_routine, data);
+	pthread_join(data->threads[0], NULL);
+	return (0);
 }
 
-void free_data(t_data *data)
+void	free_data(t_data *data)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (++i < data->n_philo)
-    {
-        pthread_mutex_destroy(&data->forks[i]);
-        pthread_mutex_destroy(&data->philo[i].mutex_last_eat_time);
-        pthread_mutex_destroy(&data->philo[i].mutex_n_meals);
-    }
-    pthread_mutex_destroy(&data->print);
-    pthread_mutex_destroy(&data->mut_died);
-    pthread_mutex_destroy(&data->mut_check_meals);
-    free(data->philo);
-    free(data->threads);
-    free(data->forks);
+	i = -1;
+	while (++i < data->n_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philo[i].mutex_last_eat_time);
+		pthread_mutex_destroy(&data->philo[i].mutex_n_meals);
+	}
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->mut_died);
+	pthread_mutex_destroy(&data->mut_check_meals);
+	free(data->philo);
+	free(data->threads);
+	free(data->forks);
 }
 
-void all()
+void	all(void)
 {
-    system ("Leaks philo");
+	system("Leaks philo");
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    atexit(all);
-    t_data data;
+	t_data	data;
 
-    if (ac != 5 && ac != 6) 
-        return (1);
-    if (!check_args(av))
-        return 1;
-    if (!init_data(&data, av, ac))
-        return 1;
-    if (data.n_philo == 1)
-        one_philo(&data);
-    else
-    {
-        if (!create_threads(&data))
-            return 1;
-    }
-    free_data(&data);
+	atexit(all);
+	if (ac != 5 && ac != 6)
+		return (1);
+	if (!check_args(av))
+		return (1);
+	if (!init_data(&data, av, ac))
+	{
+		free_data(&data);
+		return (1);
+	}
+	if (data.n_philo == 1)
+		one_philo(&data);
+	else
+	{
+		if (!create_threads(&data))
+			return (1);
+	}
+	free_data(&data);
 }
