@@ -6,15 +6,15 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 15:23:45 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Philosophers_bonus.h"
+#include "philosophers_bonus.h"
 
-void one_philo(t_data *data)
+void	one_philo(t_data *data)
 {
-	int pid;
+	int	pid;
 
 	pid = fork();
 	if (pid < 0)
@@ -25,13 +25,14 @@ void one_philo(t_data *data)
 		print_message(data->philo, "has taken a fork");
 		sem_post(&data->forks[0]);
 		ft_usleep(data->time_to_die);
-		print_message(data->philo, "is died");
+		print_message(data->philo, "died");
 		exit(1);
 	}
 	else
 		wait(NULL);
 }
-void free_data(t_data *data)
+
+void	free_data(t_data *data)
 {
 	sem_close(data->forks);
 	sem_close(data->print);
@@ -42,16 +43,10 @@ void free_data(t_data *data)
 	free(data->pid);
 }
 
-void ll()
-{
-	system("leaks philo_bonus");
-}
-
 int	main(int ac, char **av)
 {
-	t_data data;
+	t_data	data;
 
-	// atexit(ll);
 	if (ac != 5 && ac != 6)
 		return (1);
 	if (!check_args(av))

@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:08:47 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:08:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 17:33:03 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Philosophers_bonus.h"
+#include "philosophers_bonus.h"
 
 int	is_number(char **av)
 {

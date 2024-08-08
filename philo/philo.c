@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:22:08 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 15:24:51 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*one_philo_routine(void *arg)
 	print_message(data->philo, "has taken a fork");
 	pthread_mutex_unlock(&data->forks[0]);
 	ft_usleep(data->time_to_die);
-	printf("%zu  %d is died\n", time_passed(data->start), data->philo->id);
+	printf("%zu  %d died\n", time_passed(data->start), data->philo->id);
 	return (NULL);
 }
 
@@ -51,16 +51,10 @@ void	free_data(t_data *data)
 	free(data->forks);
 }
 
-void	all(void)
-{
-	system("Leaks philo");
-}
-
 int	main(int ac, char **av)
 {
 	t_data	data;
 
-	atexit(all);
 	if (ac != 5 && ac != 6)
 		return (1);
 	if (!check_args(av))

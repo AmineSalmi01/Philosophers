@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 12:12:06 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 18:51:36 by asalmi           ###   ########.fr       */
+/*   Created: 2024/08/08 21:00:55 by asalmi            #+#    #+#             */
+/*   Updated: 2024/08/08 21:00:56 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,30 @@ typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
-	int					id;
-	int					n_meals;
-	size_t				last_eat_time;
-	t_data				*data;
-}						t_philo;
+	int		id;
+	int		n_meals;
+	size_t	last_eat_time;
+	t_data	*data;
+}			t_philo;
 
 typedef struct s_data
 {
-	int					n_philo;
-	size_t				time_to_die;
-	size_t				time_to_eat;
-	size_t				time_to_sleep;
-	size_t				start;
-	int					nb_meals;
-	int					*pid;
-	bool				philo_died;
-	bool				check_meals;
-	sem_t				*forks;
-	sem_t				*print;
-	sem_t				*sem_last_eat;
-	sem_t				*stop_start;
-	sem_t				*sem_nb_meals;
-	t_philo				*philo;
-}						t_data;
+	int		n_philo;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	size_t	start;
+	int		nb_meals;
+	int		*pid;
+	bool	philo_died;
+	bool	check_meals;
+	sem_t	*forks;
+	sem_t	*print;
+	sem_t	*sem_last_eat;
+	sem_t	*stop_start;
+	sem_t	*sem_nb_meals;
+	t_philo	*philo;
+}			t_data;
 
 int		check_args(char **av);
 int		ft_atoi(char *str);
@@ -66,6 +66,6 @@ bool	philo_died(t_philo *philo);
 
 void	update_last_eat_time(t_philo *philo);
 void	update_number_meals(t_philo *philo);
-int     create_process(t_data *data);
+int		create_process(t_data *data);
 
 #endif

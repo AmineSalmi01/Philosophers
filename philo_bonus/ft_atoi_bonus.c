@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:09:04 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:09:05 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 17:33:12 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Philosophers_bonus.h"
+#include "philosophers_bonus.h"
 
 int	ft_atoi(char *str)
 {

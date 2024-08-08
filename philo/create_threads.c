@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:20:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:09:21 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 21:45:27 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	monitor(t_data *data)
 		{
 			pthread_mutex_lock(&data->mut_died);
 			data->philo_died = true;
-			printf("%zu  %d is died\n", time_passed(data->start),
+			printf("%zu  %d died\n", time_passed(data->start),
 				data->philo->id);
 			pthread_mutex_unlock(&data->mut_died);
 			return (1);
@@ -81,6 +81,7 @@ int	monitor(t_data *data)
 		if (check_all_philo_ate(data) == 1)
 			return (1);
 	}
+	ft_usleep(1);
 	return (0);
 }
 

@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:10:08 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 18:40:15 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/08 17:33:15 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Philosophers_bonus.h"
+#include "philosophers_bonus.h"
 
 size_t	get_time(void)
 {

@@ -1,4 +1,16 @@
-#include "Philosophers_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_process.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/08 17:13:39 by asalmi            #+#    #+#             */
+/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philosophers_bonus.h"
 
 void	*monitore(void *param)
 {
@@ -12,7 +24,8 @@ void	*monitore(void *param)
 		if (philo_died(philo) == true)
 		{
 			sem_wait(philo->data->print);
-			printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id, "is died");
+			printf("%ld  %d %s\n", time_passed(philo->data->start), philo->id,
+				"died");
 			exit(EXIT_FAILURE);
 		}
 		usleep(500);
@@ -23,7 +36,7 @@ void	*monitore(void *param)
 void	routine(t_philo *philo)
 {
 	pthread_t	thread;
-	
+
 	sem_wait(philo->data->stop_start);
 	pthread_create(&thread, NULL, monitore, philo);
 	if ((philo->id % 2) == 0)
@@ -33,12 +46,37 @@ void	routine(t_philo *philo)
 		ft_think(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
-		if (philo->data->nb_meals != -1 && philo->n_meals >= philo->data->nb_meals)
+		if (philo->data->nb_meals != -1
+			&& philo->n_meals >= philo->data->nb_meals)
 		{
 			exit(EXIT_SUCCESS);
 		}
 	}
 	pthread_join(thread, NULL);
+}
+
+void	wait_process(t_data *data)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	status = 0;
+	while (i < data->n_philo)
+	{
+		waitpid(-1, &status, 0);
+		if (status != 0)
+		{
+			i = 0;
+			while (i < data->n_philo)
+			{
+				kill(data->pid[i], SIGKILL);
+				i++;
+			}
+			break ;
+		}
+		i++;
+	}
 }
 
 int	create_process(t_data *data)
@@ -58,28 +96,9 @@ int	create_process(t_data *data)
 			routine(&data->philo[i]);
 			exit(EXIT_SUCCESS);
 		}
-		i++;
-	}
-	i = 0;
-	while (i < data->n_philo)
-	{
 		sem_post(data->stop_start);
 		i++;
 	}
-	i = 0;
-	while (i < data->n_philo)
-	{
-		waitpid(-1, &status, 0);
-		if (status != 0)
-		{
-			i = 0;
-			while (i < data->n_philo)
-			{
-				kill(data->pid[i], SIGKILL);
-				i++;
-			}
-		}
-		i++;
-	}
+	wait_process(data);
 	return (1);
 }
