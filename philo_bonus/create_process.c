@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:13:39 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 16:18:00 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ int	create_process(t_data *data)
 			routine(&data->philo[i]);
 			exit(EXIT_SUCCESS);
 		}
+		i++;
+	}
+	i = 0;
+	while (i < data->n_philo)
+	{
 		sem_post(data->stop_start);
 		i++;
 	}

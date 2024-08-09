@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 21:00:55 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 21:00:56 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 16:11:35 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ bool	philo_died(t_philo *philo);
 void	update_last_eat_time(t_philo *philo);
 void	update_number_meals(t_philo *philo);
 int		create_process(t_data *data);
+void	unlink_all(void);
 
 #endif

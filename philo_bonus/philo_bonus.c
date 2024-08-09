@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 16:14:43 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int ac, char **av)
 	if (!init_data(&data, av, ac))
 	{
 		free_data(&data);
+		unlink_all();
 		return (1);
 	}
 	if (data.n_philo == 1)
@@ -64,4 +65,5 @@ int	main(int ac, char **av)
 			return (1);
 	}
 	free_data(&data);
+	unlink_all();
 }
