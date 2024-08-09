@@ -1,6 +1,6 @@
 NAME = philo_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRC = check_args_bonus.c ft_atoi_bonus.c philo_bonus.c init_structs_bonus.c \

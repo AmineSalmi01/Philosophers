@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:22:08 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/08 21:21:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:15:07 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "Philosophers.h"
 
 void	*one_philo_routine(void *arg)
 {

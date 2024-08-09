@@ -9,10 +9,10 @@ OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) philosophers.h
+$(NAME) : $(OBJS) Philosophers.h
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-%.o : %.c philosophers.h
+%.o : %.c Philosophers.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 

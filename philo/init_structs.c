@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:21:23 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/07 12:09:29 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:14:45 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "Philosophers.h"
 
 void	init_philo(t_data *data)
 {

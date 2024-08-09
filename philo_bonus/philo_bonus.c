@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/09 16:14:43 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:16:44 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "Philosophers_bonus.h"
 
 void	one_philo(t_data *data)
 {
