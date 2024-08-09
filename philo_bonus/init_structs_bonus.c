@@ -36,12 +36,12 @@ void	unlink_all(void)
 	sem_unlink("/meals");
 }
 
-void *safe_malloc(size_t size)
+void	*safe_malloc(size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = malloc(size);
-	if(!ptr)
+	if (!ptr)
 		exit(EXIT_FAILURE);
 	return (ptr);
 }
