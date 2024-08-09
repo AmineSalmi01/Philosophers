@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:22:08 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/09 17:15:07 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:37:46 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ int	main(int ac, char **av)
 	if (!check_args(av))
 		return (1);
 	if (!init_data(&data, av, ac))
-	{
-		free_data(&data);
 		return (1);
-	}
 	if (data.n_philo == 1)
 		one_philo(&data);
 	else

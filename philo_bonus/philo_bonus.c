@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:11:02 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/09 17:16:44 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:39:31 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int ac, char **av)
 		return (1);
 	if (!init_data(&data, av, ac))
 	{
-		free_data(&data);
 		unlink_all();
 		return (1);
 	}

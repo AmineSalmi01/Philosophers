@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:10:24 by asalmi            #+#    #+#             */
-/*   Updated: 2024/08/09 17:16:35 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/08/09 17:49:29 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void	unlink_all(void)
 	sem_unlink("/meals");
 }
 
+void *safe_malloc(size_t size)
+{
+	void *ptr;
+
+	ptr = malloc(size);
+	if(!ptr)
+		exit(EXIT_FAILURE);
+	return (ptr);
+}
+
 int	init_data(t_data *data, char **av, int ac)
 {
 	unlink_all();
@@ -50,8 +60,8 @@ int	init_data(t_data *data, char **av, int ac)
 		|| data->time_to_eat < 60 || data->time_to_sleep < 60
 		|| data->nb_meals == 0)
 		return (0);
-	data->philo = malloc(sizeof(t_philo) * (data->n_philo));
-	data->pid = malloc(sizeof(int) * (data->n_philo));
+	data->philo = safe_malloc(sizeof(t_philo) * (data->n_philo));
+	data->pid = safe_malloc(sizeof(int) * (data->n_philo));
 	data->start = get_time();
 	data->forks = sem_open("/forks", O_EXCL | O_CREAT, 0640, data->n_philo);
 	data->print = sem_open("/print", O_EXCL | O_CREAT, 0640, 1);
